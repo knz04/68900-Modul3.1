@@ -32,9 +32,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 const val MAX_PEOPLE = 4
-private val _suggestedDestinations = MutableStateFlow<List<ExploreModel>>(emptyList())
 
-val suggestedDestinations: StateFlow<List<ExploreModel>> = _suggestedDestinations.asStateFlow()
 
 
 
@@ -43,6 +41,9 @@ class MainViewModel @Inject constructor(
     private val destinationsRepository: DestinationsRepository,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
+    private val _suggestedDestinations = MutableStateFlow<List<ExploreModel>>(emptyList())
+
+    val suggestedDestinations: StateFlow<List<ExploreModel>> = _suggestedDestinations.asStateFlow()
     init {
         _suggestedDestinations.value = destinationsRepository.destinations
     }
